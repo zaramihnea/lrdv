@@ -56,8 +56,8 @@ src/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/literatura-romana-dimensiune-virtuala.git
-cd literatura-romana-dimensiune-virtuala
+git clone https://github.com/zaramihnea/lrdv.git
+cd lrdv
 ```
 
 2. Install dependencies:
