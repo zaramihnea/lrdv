@@ -1,0 +1,89 @@
+/* src/styles/components/section-navigation.css */
+.section-navigation {
+    position: sticky;
+    top: var(--header-height);
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    z-index: 900;
+    padding: var(--spacing-sm) 0;
+    margin-bottom: var(--spacing-xl);
+    transition: top var(--transition-medium), transform var(--transition-medium);
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  /* Add subtle entrance animation when sticking to top */
+  .section-navigation.sticky {
+    transform: translateY(0);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .section-nav-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+  }
+  
+  .section-nav-button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: transparent;
+    color: var(--color-text);
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    position: relative;
+    font-size: 0.95rem;
+  }
+  
+  .section-nav-button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--color-secondary);
+    transition: width var(--transition-medium);
+  }
+  
+  .section-nav-button:hover {
+    color: var(--color-primary);
+  }
+  
+  .section-nav-button:hover::after {
+    width: 50%;
+  }
+  
+  .section-nav-button.active {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+  
+  .section-nav-button.active::after {
+    width: 70%;
+  }
+  
+  @media (max-width: 992px) {
+    .section-navigation {
+      top: var(--header-height-mobile);
+    }
+    
+    .section-nav-container {
+      padding: 0 var(--spacing-lg);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .section-nav-button {
+      font-size: 0.85rem;
+      padding: var(--spacing-xs) var(--spacing-sm);
+    }
+    
+    .section-navigation {
+      padding: var(--spacing-xs) 0;
+    }
+  }

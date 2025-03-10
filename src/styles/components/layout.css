@@ -1,0 +1,52 @@
+/* src/styles/components/layout.css */
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    flex: 1;
+  }
+  
+  .scroll-to-top {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-fast);
+    z-index: 900;
+    opacity: 0.8;
+  }
+  
+  .scroll-to-top:hover {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+  
+  .scroll-to-top svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  @media (max-width: 768px) {
+    .scroll-to-top {
+      bottom: var(--spacing-lg);
+      right: var(--spacing-lg);
+      width: 40px;
+      height: 40px;
+    }
+    
+    .scroll-to-top svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
