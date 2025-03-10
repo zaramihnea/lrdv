@@ -4,16 +4,40 @@
   --font-primary: 'Montserrat', sans-serif;
   --font-secondary: 'Playfair Display', serif;
   
-  /* Colors */
+  /* Base Colors */
   --color-primary: #3c2a21; /* Rich brown */
   --color-secondary: #9c6644; /* Burnt sienna */
   --color-accent: #d5cea3; /* Parchment */
+  
+  /* New accent colors for different sections */
+  --color-accent-blue: #8ecae6; /* Light blue */
+  --color-accent-green: #a7c957; /* Sage green */
+  --color-accent-red: #e07a5f; /* Terra cotta */
+  --color-accent-purple: #9f86c0; /* Lavender */
+  --color-accent-yellow: #f2cc8f; /* Mellow yellow */
+  
+  /* Section-specific colors */
+  --color-inscriere: var(--color-accent-blue);
+  --color-echipaje: var(--color-accent-green);
+  --color-organizare: var(--color-accent-purple);
+  --color-evaluare: var(--color-accent-red);
+  --color-rezultate: var(--color-accent-yellow);
+  
+  /* UI Colors */
   --color-background: #f5f5f5; /* Light gray */
   --color-text: #1e1e1e;
   --color-text-light: #666666;
   --color-border: #e0e0e0;
   --color-white: #ffffff;
   --color-black: #000000;
+  --color-success: #4caf50;
+  --color-warning: #ff9800;
+  --color-error: #f44336;
+  --color-info: #2196f3;
+  
+  /* Gradient Presets */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  --gradient-accent: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
   
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -27,20 +51,34 @@
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
+  --radius-pill: 50px;
   
   /* Box Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
+  --shadow-focus: 0 0 0 3px rgba(156, 102, 68, 0.25);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
   
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-medium: 300ms ease;
   --transition-slow: 500ms ease;
+  --transition-bounce: 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
   
   /* Layout */
   --header-height: 80px;
   --header-height-mobile: 70px;
   --content-max-width: 1200px;
   --content-section-spacing: 80px;
+  
+  /* Z-indices */
+  --z-negative: -1;
+  --z-elevate: 2;
+  --z-sticky: 100;
+  --z-header: 1000;
+  --z-overlay: 1050;
+  --z-modal: 1100;
+  --z-popover: 1200;
+  --z-tooltip: 1300;
 }

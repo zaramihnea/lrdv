@@ -1,0 +1,28 @@
+/* src/styles/rgb-variables.css */
+
+/* RGB values of colors for use in rgba() functions */
+:root {
+    /* Base colors in RGB format */
+    --color-primary-rgb: 60, 42, 33; /* Rich brown */
+    --color-secondary-rgb: 156, 102, 68; /* Burnt sienna */
+    --color-accent-rgb: 213, 206, 163; /* Parchment */
+    
+    /* Section colors in RGB format */
+    --color-inscriere-rgb: 142, 202, 230; /* Light blue */
+    --color-echipaje-rgb: 167, 201, 87; /* Sage green */
+    --color-organizare-rgb: 159, 134, 192; /* Lavender */
+    --color-evaluare-rgb: 224, 122, 95; /* Terra cotta */
+    --color-rezultate-rgb: 242, 204, 143; /* Mellow yellow */
+    
+    /* UI Colors in RGB format */
+    --color-background-rgb: 245, 245, 245;
+    --color-text-rgb: 30, 30, 30;
+    --color-text-light-rgb: 102, 102, 102;
+    --color-border-rgb: 224, 224, 224;
+    --color-white-rgb: 255, 255, 255;
+    --color-black-rgb: 0, 0, 0;
+    --color-success-rgb: 76, 175, 80;
+    --color-warning-rgb: 255, 152, 0;
+    --color-error-rgb: 244, 67, 54;
+    --color-info-rgb: 33, 150, 243;
+  }

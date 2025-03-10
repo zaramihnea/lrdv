@@ -1,0 +1,122 @@
+/* src/styles/components/literary-quote.css */
+.literary-quote-container {
+    padding: var(--spacing-xl) 0;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .literary-quote {
+    position: relative;
+    font-family: var(--font-secondary);
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: var(--color-primary);
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-xxl);
+    margin: 0;
+    background-color: transparent;
+    border-left: none;
+    border-radius: 0;
+  }
+  
+  .literary-quote::before,
+  .literary-quote::after {
+    position: absolute;
+    font-family: var(--font-secondary);
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--color-accent);
+    opacity: 0.5;
+  }
+  
+  .literary-quote::before {
+    content: '\201C'; /* Left double quotation mark */
+    left: 0;
+    top: 0;
+  }
+  
+  .literary-quote::after {
+    content: '\201D'; /* Right double quotation mark */
+    right: 0;
+    bottom: 0;
+  }
+  
+  .literary-quote p {
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .quote-footer {
+    margin-top: var(--spacing-lg);
+    font-style: normal;
+    text-align: right;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .quote-footer::before {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background-color: var(--color-accent);
+    margin: var(--spacing-md) auto;
+  }
+  
+  .quote-author {
+    display: block;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+  }
+  
+  .quote-source {
+    display: block;
+    font-size: 0.9rem;
+    font-style: normal;
+    color: var(--color-text-light);
+    margin-top: var(--spacing-xs);
+  }
+  
+  /* Decorative elements */
+  .literary-quote-container::before,
+  .literary-quote-container::after {
+    content: '❦';
+    position: absolute;
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .literary-quote-container::before {
+    top: 0;
+  }
+  
+  .literary-quote-container::after {
+    bottom: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .literary-quote {
+      font-size: 1.25rem;
+      padding: var(--spacing-lg) var(--spacing-xl);
+    }
+    
+    .literary-quote::before,
+    .literary-quote::after {
+      font-size: 3.5rem;
+    }
+    
+    .quote-author {
+      font-size: 1rem;
+    }
+    
+    .quote-source {
+      font-size: 0.8rem;
+    }
+  }
