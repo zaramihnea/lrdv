@@ -9,7 +9,7 @@ const Banner: React.FC = () => {
     <div className="banner" ref={bannerRef}>
       <div className="banner-image-container">
         <img
-          src="/src/assets/images/banner_test.jpg"
+          src="/images/banner_test.jpg"
           alt="Literatura română în dimensiune virtuală"
           className="banner-image"
         />

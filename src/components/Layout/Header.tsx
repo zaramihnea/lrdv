@@ -42,7 +42,7 @@ const Header: React.FC = () => {
       <div className="header-container">
         <div className="logo-container">
           <a href="https://www.liis.ro/" target="_blank" rel="noopener noreferrer">
-            <img src="/src/assets/images/logo.png" alt="LIIS Logo" className="logo" />
+            <img src="/images/logo.png" alt="LIIS Logo" className="logo" />
           </a>
         </div>
 

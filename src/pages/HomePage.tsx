@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
     const preloadLink = document.createElement('link');
     preloadLink.rel = 'preload';
     preloadLink.as = 'image';
-    preloadLink.href = '/src/assets/images/banner_nou.jpg';
+    preloadLink.href = '/images/banner_test.jpg';
     document.head.appendChild(preloadLink);
     
     return () => {
@@ -28,7 +28,7 @@ const HomePage: React.FC = () => {
         <meta property="og:description" content="Concurs național interdisciplinar care valorifică performanțele elevilor de gimnaziu și liceu în utilizarea computerului și a potențialului creativ într-un demers personalizat de abordare a specificului cultural și literar național." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://literatura-romana-dimensiune-virtuala.vercel.app/" />
-        <meta property="og:image" content="/src/assets/images/banner_nou.jpg" />
+        <meta property="og:image" content="/images/banner_test.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <div className="home-page">
