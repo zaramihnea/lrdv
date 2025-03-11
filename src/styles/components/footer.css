@@ -1,132 +1,220 @@
 /* src/styles/components/footer.css */
 .footer {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    padding: var(--spacing-xxl) 0;
-    margin-top: var(--spacing-xxl);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--spacing-xxl) 0;
+  margin-top: var(--spacing-xxl);
+}
+
+.footer-container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-xl);
+}
+
+.footer-credits {
+  flex: 1;
+  min-width: 300px;
+}
+
+.footer-title {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-white);
+}
+
+.footer-developers {
+  margin-top: var(--spacing-lg);
+}
+
+.developers-title {
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-developers p {
+  margin-bottom: var(--spacing-xs);
+}
+
+.footer-developers a {
+  color: var(--color-accent);
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.footer-developers a:hover {
+  color: var(--color-white);
+}
+
+.copyright {
+  margin-top: var(--spacing-lg);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.footer-contact {
+  flex: 1;
+  min-width: 300px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.contact-item {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+}
+
+.contact-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.contact-text p {
+  margin-bottom: var(--spacing-xs);
+}
+
+.institution-name {
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--spacing-xl);
+}
+
+.footer-decoration .decoration-line {
+  height: 1px;
+  width: 80px;
+  background-color: rgba(213, 206, 163, 0.3);
+}
+
+.footer-decoration .decoration-icon {
+  margin: 0 var(--spacing-sm);
+  color: var(--color-accent);
+  font-size: 1.5rem;
+}
+
+/* Update the contact links style */
+.contact-link {
+  color: var(--color-accent);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.contact-link:hover {
+  color: var(--color-white);
+}
+
+.contact-link::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.contact-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Add tooltip styling */
+.contact-link[title]::before {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.contact-link[title]:hover::before {
+  opacity: 1;
+}
+
+/* Add more visual cues for clickable items */
+.contact-text p a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.contact-text p a::after {
+  font-family: "Font Awesome 5 Free";
+  margin-left: 5px;
+  font-size: 0.75em;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Specific icon for each contact type */
+.contact-text p a[href^="mailto:"]::after {
+  content: "\f0e0"; /* envelope icon */
+  font-weight: 900;
+}
+
+.contact-text p a[href^="tel:"]::after {
+  content: "\f095"; /* phone icon */
+  font-weight: 900;
+}
+
+.contact-text p a[href="#"]::after {
+  content: "\f3c5"; /* map marker icon */
+  font-weight: 900;
+}
+
+.contact-text p a:hover::after {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: var(--spacing-xl) 0;
   }
-  
+
   .footer-container {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    padding: 0 var(--spacing-xl);
+    padding: 0 var(--spacing-lg);
   }
-  
+
   .footer-content {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: var(--spacing-xl);
   }
-  
-  .footer-credits {
-    flex: 1;
-    min-width: 300px;
-  }
-  
+
   .footer-title {
-    font-size: 1.5rem;
-    margin-bottom: var(--spacing-md);
-    color: var(--color-white);
+    font-size: 1.3rem;
   }
-  
-  .footer-developers {
-    margin-top: var(--spacing-lg);
-  }
-  
-  .developers-title {
-    color: var(--color-accent);
-    font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-  }
-  
-  .footer-developers p {
-    margin-bottom: var(--spacing-xs);
-  }
-  
-  .footer-developers a {
-    color: var(--color-accent);
-    font-weight: 600;
-    transition: color var(--transition-fast);
-  }
-  
-  .footer-developers a:hover {
-    color: var(--color-white);
-  }
-  
-  .copyright {
-    margin-top: var(--spacing-lg);
-    font-size: 0.9rem;
-    opacity: 0.8;
-  }
-  
-  .footer-contact {
-    flex: 1;
-    min-width: 300px;
-  }
-  
-  .contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-  }
-  
-  .contact-item {
-    display: flex;
-    gap: var(--spacing-md);
-    align-items: flex-start;
-  }
-  
-  .contact-icon {
-    width: 24px;
-    height: 24px;
-    color: var(--color-accent);
-    flex-shrink: 0;
-  }
-  
-  .contact-text p {
-    margin-bottom: var(--spacing-xs);
-  }
-  
-  .institution-name {
-    font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-  }
-  
-  .footer-decoration {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: var(--spacing-xl);
-  }
-  
-  .footer-decoration .decoration-line {
-    height: 1px;
-    width: 80px;
-    background-color: rgba(213, 206, 163, 0.3);
-  }
-  
-  .footer-decoration .decoration-icon {
-    margin: 0 var(--spacing-sm);
-    color: var(--color-accent);
-    font-size: 1.5rem;
-  }
-  
-  @media (max-width: 768px) {
-    .footer {
-      padding: var(--spacing-xl) 0;
-    }
-    
-    .footer-container {
-      padding: 0 var(--spacing-lg);
-    }
-    
-    .footer-content {
-      flex-direction: column;
-      gap: var(--spacing-xl);
-    }
-    
-    .footer-title {
-      font-size: 1.3rem;
-    }
-  }
+}

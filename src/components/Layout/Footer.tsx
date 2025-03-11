@@ -3,6 +3,13 @@ import React from 'react';
 import '../../styles/components/footer.css';
 
 const Footer: React.FC = () => {
+  // Function to open Google Maps with the address
+  const openGoogleMaps = () => {
+    // Encode the address for URL
+    const encodedAddress = encodeURIComponent('Liceul Teoretic de Informatică Grigore Moisil, Strada Petre Andrei 9, Iași, Romania');
+    window.open(`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`, '_blank');
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -32,7 +39,20 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="contact-text">
                   <p className="institution-name">LICEUL TEORETIC DE INFORMATICĂ „GRIGORE MOISIL" IAŞI</p>
-                  <p><strong>Adresa:</strong> Str. Petre Andrei nr. 9</p>
+                  <p>
+                    <strong>Adresa: </strong>
+                    <a 
+                      href="#" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        openGoogleMaps();
+                      }}
+                      className="contact-link"
+                      title="Deschide în Google Maps"
+                    >
+                      Str. Petre Andrei nr. 9
+                    </a>
+                  </p>
                 </div>
               </div>
 
@@ -41,7 +61,15 @@ const Footer: React.FC = () => {
                   <i className="fas fa-phone"></i>
                 </div>
                 <div className="contact-text">
-                  <p><strong>Telefon/Fax:</strong> 0232-211-826 / 0232-216-290</p>
+                  <p>
+                    <strong>Telefon/Fax: </strong>
+                    <a href="tel:0232-211-826" className="contact-link" title="Apelează">
+                      0232-211-826
+                    </a> / 
+                    <a href="tel:0232-216-290" className="contact-link" title="Apelează">
+                      0232-216-290
+                    </a>
+                  </p>
                 </div>
               </div>
 
@@ -50,7 +78,12 @@ const Footer: React.FC = () => {
                   <i className="fas fa-envelope"></i>
                 </div>
                 <div className="contact-text">
-                  <p><strong>E-mail:</strong> licinfoiasi@liis.ro</p>
+                  <p>
+                    <strong>E-mail: </strong>
+                    <a href="mailto:licinfoiasi@liis.ro" className="contact-link" title="Trimite email">
+                      licinfoiasi@liis.ro
+                    </a>
+                  </p>
                 </div>
               </div>
 
