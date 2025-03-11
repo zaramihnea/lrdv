@@ -1,0 +1,300 @@
+/* src/styles/components/contest-sections.css */
+
+/* Main container - adding specificity to all selectors */
+.contest-sections {
+  background-color: white;
+  padding: 3rem 0;
+}
+
+/* Container - specific to contest sections */
+.contest-sections .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header styling */
+.contest-sections .section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.contest-sections .section-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  font-family: serif;
+}
+
+.contest-sections .title-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contest-sections .decoration-line {
+  width: 4rem;
+  height: 1px;
+  background-color: #d1d5db;
+}
+
+.contest-sections .decoration-icon {
+  margin: 0 1rem;
+  font-size: 1.5rem;
+  color: #92400e;
+}
+
+.contest-sections .section-description {
+  margin-top: 1rem;
+  color: #4b5563;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mobile tabs - with enhanced visibility */
+.contest-sections .mobile-tabs {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 0.5rem 0.25rem 1rem;
+  margin-bottom: 1.5rem;
+  position: relative; /* For indicator arrow */
+}
+
+.contest-sections .tab-button {
+  padding: 0.75rem 1.25rem;
+  margin-right: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.contest-sections .tab-button.active {
+  background-color: #1f2937;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contest-sections .tab-button:hover:not(.active) {
+  background-color: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+.contest-sections .tab-button i {
+  margin-right: 0.5rem;
+}
+
+/* Hide scrollbar for mobile tabs */
+.contest-sections .mobile-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.contest-sections .mobile-tabs {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Desktop sections grid - centered for odd number of items */
+.contest-sections .desktop-sections {
+  display: none;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  /* Added for centering odd items */
+  justify-items: center;
+}
+
+/* Section cards */
+.contest-sections .section-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid;
+  transition: transform 0.3s;
+  max-width: 600px; /* Set max-width to ensure cards are not too wide */
+  width: 100%; /* For mobile and consistency */
+}
+
+.contest-sections .section-card:hover {
+  transform: translateY(-5px);
+}
+
+.contest-sections .section-content {
+  display: flex;
+  align-items: flex-start;
+}
+
+.contest-sections .section-icon {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.contest-sections .section-icon i {
+  font-size: 1.25rem;
+}
+
+.contest-sections .section-details {
+  flex: 1;
+}
+
+.contest-sections .section-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  font-family: serif;
+}
+
+.contest-sections .section-paragraph {
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+.contest-sections .details-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.contest-sections .details-link:hover {
+  text-decoration: underline;
+}
+
+.contest-sections .details-link i {
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+}
+
+/* Mobile carousel */
+.contest-sections .mobile-carousel {
+  display: block;
+}
+
+.contest-sections .carousel-slide {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid;
+  height: 200px;
+}
+
+.contest-sections .carousel-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.contest-sections .carousel-arrow {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.contest-sections .carousel-arrow:hover {
+  background-color: #e5e7eb;
+  transform: scale(1.1);
+}
+
+.contest-sections .carousel-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.contest-sections .carousel-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: #d1d5db;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.contest-sections .carousel-dot.active {
+  background-color: #4b5563;
+  transform: scale(1.2);
+}
+
+.contest-sections .carousel-dot:hover:not(.active) {
+  background-color: #9ca3af;
+}
+
+/* Helper text for mobile tabs to make scrolling more obvious */
+.contest-sections .mobile-tabs-container {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.contest-sections .scroll-hint {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Media queries for responsive design */
+@media (min-width: 768px) {
+  .contest-sections .section-title {
+    font-size: 2.25rem;
+  }
+  
+  .contest-sections .container {
+    padding: 0 2rem;
+  }
+  
+  .contest-sections .mobile-tabs-container {
+    display: none;
+  }
+  
+  .contest-sections .desktop-sections {
+    display: grid;
+  }
+  
+  .contest-sections .mobile-carousel {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contest-sections .desktop-sections {
+    grid-template-columns: repeat(2, minmax(0, 600px));
+    justify-content: center;
+  }
+  
+  /* Special handling for last item when there's an odd number of sections */
+  .contest-sections .desktop-sections > *:last-child:nth-child(odd) {
+    grid-column: 1 / span 2;
+    max-width: 600px;
+    justify-self: center;
+  }
+}

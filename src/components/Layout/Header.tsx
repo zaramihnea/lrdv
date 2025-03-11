@@ -55,7 +55,7 @@ const Header: React.FC = () => {
             rel="noopener noreferrer"
             className="inscription-button"
           >
-            Înscriere
+            Înscrie-te acum
           </a>
           <button 
             className="menu-toggle" 

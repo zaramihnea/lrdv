@@ -1,7 +1,7 @@
 // src/components/Home/HomeContent.tsx
 import React, { useEffect } from 'react';
 import CountdownTimer from '../UI/CountdownTimer';
-import QuickLinks from '../UI/QuickLinks';
+import ContestSections from './ContestSections';
 import '../../styles/components/home-content.css';
 
 const HomeContent: React.FC = () => {
@@ -36,7 +36,6 @@ const HomeContent: React.FC = () => {
 
   return (
     <div className="home-content">
-      <QuickLinks />
       
       <section className="intro-section">
         <div className="container">
@@ -66,8 +65,11 @@ const HomeContent: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <section id="sectiuni">
+        <ContestSections />
+      </section>
       
-      {/* Section with updated styling and Font Awesome icons */}
       <section id="inscriere" className="content-section">
         <div className="container">
           <div className="section-header">
@@ -87,7 +89,7 @@ const HomeContent: React.FC = () => {
                 Etapa de înscriere are loc în intervalul <strong>28‒29.05.2024</strong>.
               </p>
               <p className="content-paragraph">
-                Se completează <strong>obligatoriu</strong> și formularul de înscriere <strong>(vezi butonul aflat în colțul din dreapta sus)</strong>!
+                Se completează <strong>obligatoriu</strong> formularul de înscriere.
               </p>
               
               <div className="cta-container">
