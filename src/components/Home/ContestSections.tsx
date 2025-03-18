@@ -128,7 +128,7 @@ const ContestSections: React.FC = () => {
 
         {/* Desktop view: all sections at once */}
         <div className="desktop-sections">
-          {sections.map((section, index) => (
+          {sections.map((section) => (
             <div 
               key={section.id}
               className="section-card"
