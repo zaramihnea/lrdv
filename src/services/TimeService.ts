@@ -11,7 +11,7 @@ export class TimeService {
     this.syncPromise = this.syncWithServer();
     
     // Re-sync every minute to maintain accuracy
-    setInterval(() => this.syncWithServer(), 60000);
+    setInterval(() => this.syncWithServer(), 30000);
   }
   
   // Add a listener that will be called whenever time is synced
