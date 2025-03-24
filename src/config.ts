@@ -40,8 +40,8 @@ const configData: Config = {
   registrationFormLink: "https://forms.gle/5GPEu4GWnpxjbghd9",
 
   registrationPeriod: {
-    startDate: new Date("2025-03-24T22:25:00"), // Data când se deschide înscrierea
-    endDate: new Date("2025-03-24T22:27:00"), // Data când se închide înscrierea
+    startDate: new Date("2025-03-24T22:30:00"), // Data când se deschide înscrierea
+    endDate: new Date("2025-03-24T22:35:00"), // Data când se închide înscrierea
   },
 
   // Link catre google drive pentru rezultate, lasati null daca nu exista inca. Se poate utiliza si orice alt service de stocare a fisierelor.
