@@ -69,9 +69,9 @@ yarn install
 
 3. Start the development server:
 ```bash
-npm run dev
+npm start
 # or
-yarn dev
+yarn start
 ```
 
 4. Open your browser and navigate to `http://localhost:5173`
