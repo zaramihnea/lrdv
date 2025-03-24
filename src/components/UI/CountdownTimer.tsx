@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { getRegistrationStatus } from '../../config';
 import { timeService } from '../../services/TimeService';
 import RegistrationButton from './RegistrationButton';
+import { isRegistrationOpen } from '../../config';
 import '../../styles/components/countdown-timer.css';
 
 const CountdownTimer: React.FC<{ targetDate?: Date; eventLabel?: string }> = ({ 
@@ -87,6 +88,7 @@ const CountdownTimer: React.FC<{ targetDate?: Date; eventLabel?: string }> = ({
   const renderContent = () => {
     // Always get fresh status
     const status = getRegistrationStatus();
+    const isOpen = isRegistrationOpen();
     
     if (status.phase === 'before') {
       return (
@@ -96,7 +98,7 @@ const CountdownTimer: React.FC<{ targetDate?: Date; eventLabel?: string }> = ({
           </p>
         </div>
       );
-    } else if (status.phase === 'during') {
+    } else if (status.phase === 'during' && isOpen) {
       return (
         <div className="countdown-expired">
           <p className="registration-message">
