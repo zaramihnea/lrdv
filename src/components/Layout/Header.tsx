@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navigation from '../UI/Navigation';
+import RegistrationButton from '../UI/RegistrationButton';
 import '../../styles/components/header.css';
 
 const Header: React.FC = () => {
@@ -49,16 +50,11 @@ const Header: React.FC = () => {
         <Navigation mobileMenuOpen={mobileMenuOpen} closeMobileMenu={closeMobileMenu} />
 
         <div className="header-actions">
-          <a 
-            href="https://forms.gle/5GPEu4GWnpxjbghd9" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inscription-button"
-          >
+          <RegistrationButton className="inscription-button">
             Înscrie-te acum
-          </a>
-          <button 
-            className="menu-toggle" 
+          </RegistrationButton>
+          <button
+            className="menu-toggle"
             onClick={toggleMobileMenu}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >

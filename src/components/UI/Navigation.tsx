@@ -1,6 +1,7 @@
 // src/components/UI/Navigation.tsx
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import config from '../../config';
 import '../../styles/components/navigation.css';
 
 interface NavigationProps {
@@ -20,7 +21,8 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
   const [activeSection, setActiveSection] = useState<string>('intro');
   const navRef = useRef<HTMLUListElement>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
-  
+
+  // Filter out hidden sections from the navigation
   const navItems: NavItem[] = [
     { path: '/', label: 'Prezentare', sectionId: 'intro' },
     { path: '/sectiuni', label: 'Secțiuni', sectionId: 'sectiuni' },
@@ -29,7 +31,12 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
     { path: '/organizare', label: 'Organizare', sectionId: 'organizare' },
     { path: '/evaluare', label: 'Evaluare', sectionId: 'evaluare' },
     { path: '/rezultate', label: 'Rezultate', sectionId: 'rezultate' },
-  ];
+  ].filter(item =>
+    !item.sectionId ||
+    item.sectionId === 'intro' ||
+    item.sectionId === 'sectiuni' ||
+    !config.hiddenSections.includes(item.sectionId)
+  );
 
   useEffect(() => {
     if (location.pathname !== '/') return;
@@ -43,7 +50,7 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
     };
 
     let timeout: NodeJS.Timeout | null = null;
-    
+
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -54,17 +61,17 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
         }
       });
     };
-    
+
     const observer = new IntersectionObserver(observerCallback, observerOptions);
     document.querySelectorAll('section[id]').forEach(section => {
       observer.observe(section);
     });
-    
+
     const introSection = document.querySelector('.intro-section');
     if (introSection) {
       observer.observe(introSection);
     }
-    
+
     return () => {
       if (timeout) clearTimeout(timeout);
       observer.disconnect();
@@ -85,21 +92,21 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
 
   useEffect(() => {
     if (!navRef.current || !indicatorRef.current || !document.body.contains(navRef.current)) return;
-    
+
     const activeIndex = navItems.findIndex(item => (item.sectionId || '') === activeSection);
     if (activeIndex === -1) return;
-    
+
     const activeItem = navRef.current.querySelector(`.nav-item:nth-child(${activeIndex + 1})`);
-    
+
     if (activeItem) {
       const activeLink = activeItem.querySelector('a');
       if (activeLink) {
         requestAnimationFrame(() => {
           if (!navRef.current || !indicatorRef.current) return;
-          
+
           const { left, width } = activeLink.getBoundingClientRect();
           const navLeft = navRef.current.getBoundingClientRect().left;
-          
+
           indicatorRef.current.style.width = `${width}px`;
           indicatorRef.current.style.transform = `translateX(${left - navLeft}px)`;
         });
@@ -122,12 +129,12 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
 
   const scrollToSection = (sectionId?: string) => {
     if (!sectionId) return;
-    
+
     if (sectionId === 'intro') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    
+
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -138,7 +145,7 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
     if (location.pathname !== '/') {
       return false;
     }
-    
+
     return activeSection === (item.sectionId || '');
   };
 

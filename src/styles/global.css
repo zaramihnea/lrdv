@@ -265,6 +265,11 @@ small {
 .delay-400 { animation-delay: 400ms; }
 .delay-500 { animation-delay: 500ms; }
 
+/* Hide elements with the hidden class */
+.hidden {
+  display: none !important;
+}
+
 /* Placeholder page styles */
 .page-container {
   margin-top: var(--header-height);

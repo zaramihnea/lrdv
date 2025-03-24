@@ -2,12 +2,13 @@
 import React, { useEffect } from 'react';
 import CountdownTimer from '../UI/CountdownTimer';
 import ContestSections from './ContestSections';
+import RegistrationButton from '../UI/RegistrationButton';
+import config, { getRegistrationStatus } from '../../config';
 import '../../styles/components/home-content.css';
 
 const HomeContent: React.FC = () => {
-  // Registration deadline date
-  const registrationDeadline = new Date('2024-05-29T23:59:59');
-  
+  const registrationStatus = getRegistrationStatus();
+
   // Function to add scroll reveal animations
   useEffect(() => {
     const observerOptions = {
@@ -15,7 +16,7 @@ const HomeContent: React.FC = () => {
       rootMargin: '0px',
       threshold: 0.1
     };
-    
+
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -23,33 +24,33 @@ const HomeContent: React.FC = () => {
         }
       });
     };
-    
+
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-    
+
     // Observe all elements with the animate-on-scroll class
     document.querySelectorAll('.animate-on-scroll').forEach(element => {
       observer.observe(element);
     });
-    
+
     return () => observer.disconnect();
   }, []);
 
   return (
     <div className="home-content">
-      
+
       <section className="intro-section">
         <div className="container">
-          <CountdownTimer 
-            targetDate={registrationDeadline} 
-            eventLabel="Înscrierea" 
+        <CountdownTimer 
+            targetDate={registrationStatus.targetDate} 
+            eventLabel={registrationStatus.message} 
           />
-          
+
           <div className="intro-quote animate-on-scroll">
             <blockquote>
               <p>"Literatura și tehnologia se îmbină într-un dialog al prezentului cu trecutul."</p>
             </blockquote>
           </div>
-          
+
           <div className="intro-text">
             <p className="intro-paragraph animate-on-scroll">
               <span className="paragraph-initial">L</span>iceul Teoretic de Informatică "Grigore Moisil" din Iași a inițiat în anul 2007 un concurs județean interdisciplinar, denumit "Literatura ieșeană în dimensiune virtuală". Timp de doi ani, această competiție, organizată în parteneriat cu instituții redutabile din plan local (Inspectoratul Școlar Județean Iași, Muzeul Literaturii Române, Primăria Municipiului Iași), a devenit un punct de maxim interes în peisajul competițional al învățământului ieșean.
@@ -69,11 +70,11 @@ const HomeContent: React.FC = () => {
       <section id="sectiuni">
         <ContestSections />
       </section>
-      
-      <section id="inscriere" className="content-section">
+
+      <section id="inscriere" className={`content-section ${config.hiddenSections.includes('inscriere') ? 'hidden' : ''}`}>
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title animate-on-scroll" style={{'--section-color': 'var(--color-inscriere)'} as React.CSSProperties}>Înscriere</h2>
+            <h2 className="section-title animate-on-scroll" style={{ '--section-color': 'var(--color-inscriere)' } as React.CSSProperties}>Înscriere</h2>
             <div className="section-decoration animate-on-scroll">
               <span className="decoration-line"></span>
               <span className="decoration-icon">
@@ -82,7 +83,7 @@ const HomeContent: React.FC = () => {
               <span className="decoration-line"></span>
             </div>
           </div>
-          
+
           <div className="section-content">
             <div className="content-card animate-on-scroll">
               <p className="content-paragraph">
@@ -91,22 +92,22 @@ const HomeContent: React.FC = () => {
               <p className="content-paragraph">
                 Se completează <strong>obligatoriu</strong> formularul de înscriere.
               </p>
-              
+
               <div className="cta-container">
-                <a href="https://forms.gle/5GPEu4GWnpxjbghd9" className="cta-button inscriere-button" target="_blank" rel="noopener noreferrer">
+                <RegistrationButton className="cta-button inscriere-button">
                   Formular de înscriere
                   <i className="fas fa-arrow-right"></i>
-                </a>
+                </RegistrationButton>
               </div>
             </div>
           </div>
         </div>
       </section>
-      
-      <section id="echipaje" className="content-section">
+
+      <section id="echipaje" className={`content-section ${config.hiddenSections.includes('echipaje') ? 'hidden' : ''}`}>
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title animate-on-scroll" style={{'--section-color': 'var(--color-echipaje)'} as React.CSSProperties}>Echipaje</h2>
+            <h2 className="section-title animate-on-scroll" style={{ '--section-color': 'var(--color-echipaje)' } as React.CSSProperties}>Echipaje</h2>
             <div className="section-decoration animate-on-scroll">
               <span className="decoration-line"></span>
               <span className="decoration-icon">
@@ -115,13 +116,13 @@ const HomeContent: React.FC = () => {
               <span className="decoration-line"></span>
             </div>
           </div>
-          
+
           <div className="section-content">
             <div className="content-card animate-on-scroll">
               <p className="content-paragraph">
                 Echipajele care elaborează proiecte în vederea participării la concursul național "Literatura română în dimensiune virtuală" la secțiunile 1, 2, 3, 4 sunt alcătuite din minimum doi și maximum patru elevi de gimnaziu/ liceu, iar pentru secțiunea 5, echipajele vor avea între 6 și 12 membri (exclusiv elevi de nivel liceal), fără restricții în ceea ce privește filiera și profilul, sub îndrumarea unui profesor de limba română și unul de informatică din școala de proveniență.
               </p>
-              
+
               <div className="teams-info">
                 <div className="team-category">
                   <div className="category-icon">
@@ -132,7 +133,7 @@ const HomeContent: React.FC = () => {
                     <p>2-4 elevi gimnaziu/liceu</p>
                   </div>
                 </div>
-                
+
                 <div className="team-category">
                   <div className="category-icon">
                     <i className="fas fa-user-group"></i>
@@ -147,11 +148,11 @@ const HomeContent: React.FC = () => {
           </div>
         </div>
       </section>
-      
-      <section id="organizare" className="content-section">
+
+      <section id="organizare" className={`content-section ${config.hiddenSections.includes('organizare') ? 'hidden' : ''}`}>
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title animate-on-scroll" style={{'--section-color': 'var(--color-organizare)'} as React.CSSProperties}>Organizare</h2>
+            <h2 className="section-title animate-on-scroll" style={{ '--section-color': 'var(--color-organizare)' } as React.CSSProperties}>Organizare</h2>
             <div className="section-decoration animate-on-scroll">
               <span className="decoration-line"></span>
               <span className="decoration-icon">
@@ -160,7 +161,7 @@ const HomeContent: React.FC = () => {
               <span className="decoration-line"></span>
             </div>
           </div>
-          
+
           <div className="section-content">
             <div className="content-card animate-on-scroll">
               <h3 className="card-title">Comisia de organizare este compusă din:</h3>
@@ -182,11 +183,11 @@ const HomeContent: React.FC = () => {
           </div>
         </div>
       </section>
-      
-      <section id="evaluare" className="content-section">
+
+      <section id="evaluare" className={`content-section ${config.hiddenSections.includes('evaluare') ? 'hidden' : ''}`}>
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title animate-on-scroll" style={{'--section-color': 'var(--color-evaluare)'} as React.CSSProperties}>Evaluare</h2>
+            <h2 className="section-title animate-on-scroll" style={{ '--section-color': 'var(--color-evaluare)' } as React.CSSProperties}>Evaluare</h2>
             <div className="section-decoration animate-on-scroll">
               <span className="decoration-line"></span>
               <span className="decoration-icon">
@@ -195,7 +196,7 @@ const HomeContent: React.FC = () => {
               <span className="decoration-line"></span>
             </div>
           </div>
-          
+
           <div className="section-content">
             <div className="content-card animate-on-scroll">
               <div className="evaluation-points">
@@ -204,13 +205,13 @@ const HomeContent: React.FC = () => {
                     Pentru participarea la etapa de evaluare, se vor califica echipajele ale căror proiecte au îndeplinit standardele calitative specifice concursului.
                   </p>
                 </div>
-                
+
                 <div className="evaluation-item">
                   <p className="content-paragraph">
                     Etapa de evaluare are loc în intervalul <strong>30-31.05.2024</strong>.
                   </p>
                 </div>
-                
+
                 <div className="evaluation-item highlight">
                   <p className="content-paragraph">
                     Evaluarea se va realiza în funcție de paradigme cuprinzând criterii obiective, prin acordarea unui punctaj distribuit astfel:
@@ -234,7 +235,7 @@ const HomeContent: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="evaluation-rules">
                 <h3 className="rules-title">Reguli importante</h3>
                 <ul className="rules-list">
@@ -245,7 +246,7 @@ const HomeContent: React.FC = () => {
                   <li>Toate proiectele vor fi redactate respectându-se normele ortografice în vigoare și normele de tehnoredactare în limba română.</li>
                   <li>Nu sunt admise produse/proiecte care au fost deja prezentate și/sau premiate în alte concursuri județene/naționale.</li>
                 </ul>
-                
+
                 <div className="commission-info">
                   <h4 className="commission-title">Comisia de evaluare:</h4>
                   <p>Va fi anunțată înaintea desfășurării concursului.</p>
@@ -255,11 +256,14 @@ const HomeContent: React.FC = () => {
           </div>
         </div>
       </section>
-      
-      <section id="rezultate" className="content-section">
+
+      <section
+        id="rezultate"
+        className={`content-section ${config.hiddenSections.includes('rezultate') ? 'hidden' : ''}`}
+      >
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title animate-on-scroll" style={{'--section-color': 'var(--color-rezultate)'} as React.CSSProperties}>Rezultate</h2>
+            <h2 className="section-title animate-on-scroll" style={{ '--section-color': 'var(--color-rezultate)' } as React.CSSProperties}>Rezultate</h2>
             <div className="section-decoration animate-on-scroll">
               <span className="decoration-line"></span>
               <span className="decoration-icon">
@@ -268,19 +272,28 @@ const HomeContent: React.FC = () => {
               <span className="decoration-line"></span>
             </div>
           </div>
-          
+
           <div className="section-content">
             <div className="content-card results-card animate-on-scroll">
               <p className="content-paragraph">
-                Vor fi publicate după desfășurarea concursului.
+                {config.resultsLink ? 'Rezultatele concursului sunt disponibile.' : 'Vor fi publicate după desfășurarea concursului.'}
               </p>
-              
-              <div className="results-placeholder">
-                <div className="placeholder-icon">
-                  <i className="fas fa-external-link-alt"></i>
+
+              {config.resultsLink ? (
+                <div className="cta-container">
+                  <a href={config.resultsLink} className="cta-button" target="_blank" rel="noopener noreferrer" style={{ backgroundColor: 'var(--color-rezultate)', borderColor: 'var(--color-rezultate)' }}>
+                    Descarcă rezultatele
+                    <i className="fas fa-download"></i>
+                  </a>
                 </div>
-                <p>Rezultatele vor fi disponibile în această secțiune după evaluarea proiectelor</p>
-              </div>
+              ) : (
+                <div className="results-placeholder">
+                  <div className="placeholder-icon">
+                    <i className="fas fa-external-link-alt"></i>
+                  </div>
+                  <p>Rezultatele vor fi disponibile în această secțiune după evaluarea proiectelor</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
