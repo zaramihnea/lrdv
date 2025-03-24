@@ -15,13 +15,11 @@ export class TimeService {
 
   async syncWithServer() {
     try {
-      // Use Netlify function instead of external API
-      const response = await fetch('/.netlify/functions/serverTime');
+      // Use worldtimeapi.org as the primary time source
+      const response = await fetch('https://worldtimeapi.org/api/timezone/Europe/Bucharest');
       
-      // Fallback to worldtimeapi if Netlify function fails
       if (!response.ok) {
-        await this.fallbackSync();
-        return;
+        throw new Error('Failed to fetch time from worldtimeapi.org');
       }
       
       const data = await response.json();
@@ -33,23 +31,13 @@ export class TimeService {
       console.log(`Time synced with server: ${this.serverTime.toISOString()}`);
     } catch (error) {
       console.error('Failed to sync with server time:', error);
-      await this.fallbackSync();
-    }
-  }
-  
-  // Fallback to worldtimeapi.org if Netlify function fails
-  private async fallbackSync() {
-    try {
-      const response = await fetch('https://worldtimeapi.org/api/timezone/Europe/Bucharest');
-      const data = await response.json();
       
-      this.serverTime = new Date(data.datetime);
+      // Fallback to local time if API fails
+      this.serverTime = new Date();
       this.syncTime = Date.now();
       this.isSynced = true;
       
-      console.log(`Time synced with fallback API: ${this.serverTime.toISOString()}`);
-    } catch (error) {
-      console.error('Fallback sync also failed:', error);
+      console.warn('Using local time as fallback due to sync failure');
     }
   }
 
