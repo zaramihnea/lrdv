@@ -1,6 +1,7 @@
 // src/components/UI/RegistrationButton.tsx
 import React, { useState, useEffect } from 'react';
 import config, { isRegistrationOpen } from '../../config';
+import { timeService } from '../../services/TimeService';
 
 interface RegistrationButtonProps {
   className?: string;
@@ -16,24 +17,50 @@ const RegistrationButton: React.FC<RegistrationButtonProps> = ({
   variant = 'link'
 }) => {
   // Use state to track registration status with periodic updates
-  const [isOpen, setIsOpen] = useState(isRegistrationOpen());
+  const [isOpen, setIsOpen] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
   
-  // Update status periodically (every 10 seconds)
+  // Initial setup and sync listeners
   useEffect(() => {
     // Check immediately on mount
-    setIsOpen(isRegistrationOpen());
+    updateRegistrationStatus();
     
-    // Set up interval for periodic checking
+    // Listen for time sync events from TimeService
+    const removeListener = timeService.addSyncListener(() => {
+      updateRegistrationStatus();
+    });
+    
+    // Also set up interval for periodic checking (as a backup)
     const checkInterval = setInterval(() => {
-      setIsOpen(isRegistrationOpen());
+      updateRegistrationStatus();
     }, 10000);
     
     // Clean up on unmount
-    return () => clearInterval(checkInterval);
+    return () => {
+      removeListener();
+      clearInterval(checkInterval);
+    };
   }, []);
+  
+  // Function to update the registration status
+  const updateRegistrationStatus = () => {
+    setIsOpen(isRegistrationOpen());
+    setIsInitialized(true);
+  };
   
   // Conținut bazat pe children sau label
   const content = children || label;
+  
+  // Don't render anything meaningful until we've initialized
+  if (!isInitialized) {
+    // Optional: Show a loading indicator instead
+    return (
+      <span className={className} style={{ opacity: 0.7 }}>
+        <i className="fas fa-spinner fa-spin" style={{ marginRight: '8px' }}></i>
+        {content}
+      </span>
+    );
+  }
   
   if (!isOpen) {
     // Registration is not open - show locked button

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { getRegistrationStatus } from '../../config';
 import { timeService } from '../../services/TimeService';
 import RegistrationButton from './RegistrationButton';
-import { isRegistrationOpen } from '../../config';
 import '../../styles/components/countdown-timer.css';
 
 const CountdownTimer: React.FC<{ targetDate?: Date; eventLabel?: string }> = ({ 
@@ -18,7 +17,7 @@ const CountdownTimer: React.FC<{ targetDate?: Date; eventLabel?: string }> = ({
   });
   
   // Get registration status based on server time
-  const regStatus = getRegistrationStatus();
+  const [regStatus, setRegStatus] = useState(getRegistrationStatus());
   
   // Use either the props or the registration status
   const targetDate = propTargetDate || regStatus.targetDate;
@@ -26,6 +25,26 @@ const CountdownTimer: React.FC<{ targetDate?: Date; eventLabel?: string }> = ({
   
   const [isExpired, setIsExpired] = useState(!targetDate);
   const [shouldRefresh, setShouldRefresh] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Update registration status when time is synced
+  useEffect(() => {
+    // Initial status update
+    updateStatus();
+    
+    // Listen for time sync events
+    const removeListener = timeService.addSyncListener(() => {
+      updateStatus();
+    });
+    
+    return () => removeListener();
+  }, []);
+  
+  // Update status based on current time
+  const updateStatus = () => {
+    setRegStatus(getRegistrationStatus());
+    setIsInitialized(true);
+  };
 
   // Calculate and update time remaining
   useEffect(() => {
@@ -84,11 +103,25 @@ const CountdownTimer: React.FC<{ targetDate?: Date; eventLabel?: string }> = ({
     return value < 10 ? `0${value}` : value.toString();
   };
 
+  // Show loading state while initializing
+  if (!isInitialized) {
+    return (
+      <div className="countdown-container">
+        <h3 className="countdown-title">Se încarcă...</h3>
+        <div className="countdown-status">
+          <p className="registration-message">
+            <i className="fas fa-spinner fa-spin" style={{ marginRight: '8px' }}></i>
+            Se sincronizează ora exactă...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   // Render message and button based on registration phase
   const renderContent = () => {
     // Always get fresh status
     const status = getRegistrationStatus();
-    const isOpen = isRegistrationOpen();
     
     if (status.phase === 'before') {
       return (
@@ -98,7 +131,7 @@ const CountdownTimer: React.FC<{ targetDate?: Date; eventLabel?: string }> = ({
           </p>
         </div>
       );
-    } else if (status.phase === 'during' && isOpen) {
+    } else if (status.phase === 'during') {
       return (
         <div className="countdown-expired">
           <p className="registration-message">

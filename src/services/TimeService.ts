@@ -4,6 +4,7 @@ export class TimeService {
   private syncTime: number = 0;
   private isSynced: boolean = false;
   private syncPromise: Promise<void> | null = null;
+  private listeners: (() => void)[] = [];
 
   constructor() {
     // Initial sync and store the promise for awaiting
@@ -11,6 +12,14 @@ export class TimeService {
     
     // Re-sync every minute to maintain accuracy
     setInterval(() => this.syncWithServer(), 60000);
+  }
+  
+  // Add a listener that will be called whenever time is synced
+  addSyncListener(listener: () => void): () => void {
+    this.listeners.push(listener);
+    return () => {
+      this.listeners = this.listeners.filter(l => l !== listener);
+    };
   }
 
   async syncWithServer() {
@@ -29,6 +38,9 @@ export class TimeService {
       this.isSynced = true;
       
       console.log(`Time synced with server: ${this.serverTime.toISOString()}`);
+      
+      // Notify all listeners that time has been synced
+      this.notifyListeners();
     } catch (error) {
       console.error('Failed to sync with server time:', error);
       
@@ -38,7 +50,21 @@ export class TimeService {
       this.isSynced = true;
       
       console.warn('Using local time as fallback due to sync failure');
+      
+      // Still notify listeners even with fallback time
+      this.notifyListeners();
     }
+  }
+  
+  // Notify all registered listeners
+  private notifyListeners() {
+    this.listeners.forEach(listener => {
+      try {
+        listener();
+      } catch (e) {
+        console.error('Error in time sync listener:', e);
+      }
+    });
   }
 
   // Get current server time, adjusted for elapsed time since sync
