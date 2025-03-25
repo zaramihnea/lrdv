@@ -42,10 +42,12 @@
   height: 3px;
   background-color: var(--color-primary);
   border-radius: var(--radius-sm);
-  transition: transform 0.3s ease, width 0.3s ease;
-  z-index: 1;
+  transition: transform 0.3s ease, width 0.3s ease, opacity 0.3s ease;
+  z-index: 5; /* Ensure indicator is visible */
   pointer-events: none;
-  will-change: transform, width;
+  will-change: transform, width, opacity;
+  /* Start with zero opacity until properly positioned */
+  opacity: 0;
 }
 
 .mobile-nav-overlay {

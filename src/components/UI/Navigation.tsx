@@ -21,7 +21,9 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
   const [activeSection, setActiveSection] = useState<string>('intro');
   const navRef = useRef<HTMLUListElement>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
-
+  const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
+  const isPositionedRef = useRef(false);
+  
   // Filter out hidden sections from the navigation
   const navItems: NavItem[] = [
     { path: '/', label: 'Prezentare', sectionId: 'intro' },
@@ -37,7 +39,23 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
     item.sectionId === 'sectiuni' ||
     !config.hiddenSections.includes(item.sectionId)
   );
+  
+  // Monitor header scroll state
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsHeaderScrolled(window.scrollY > 50);
+      
+      // Ensure "Prezentare" is active when at the top
+      if (window.scrollY < 100) {
+        setActiveSection('intro');
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
+  // Set up section observers
   useEffect(() => {
     if (location.pathname !== '/') return;
 
@@ -52,6 +70,12 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
     let timeout: NodeJS.Timeout | null = null;
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      // If we're at the top, always prioritize intro
+      if (window.scrollY < 100) {
+        setActiveSection('intro');
+        return;
+      }
+      
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           if (timeout) clearTimeout(timeout);
@@ -63,6 +87,7 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
     document.querySelectorAll('section[id]').forEach(section => {
       observer.observe(section);
     });
@@ -77,52 +102,127 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
       observer.disconnect();
     };
   }, [location.pathname]);
+
+  // FOCUSED FIX: Special handling for the indicator positioning
   useEffect(() => {
-    if (!navRef.current || !indicatorRef.current) return;
-    const firstNavItem = navRef.current.querySelector('.nav-item:first-child');
-    if (firstNavItem) {
-      const firstLink = firstNavItem.querySelector('a');
-      if (firstLink) {
-        const { width } = firstLink.getBoundingClientRect();
-        indicatorRef.current.style.width = `${width}px`;
-        indicatorRef.current.style.transform = 'translateX(0)';
-      }
+    // Hide indicator until properly positioned
+    if (indicatorRef.current) {
+      indicatorRef.current.style.opacity = '0';
+      // Disable transitions initially
+      indicatorRef.current.style.transition = 'none';
     }
+
+    // Position indicator immediately using explicit first-child targeting
+    const positionToFirstItem = () => {
+      if (!navRef.current || !indicatorRef.current) return;
+      
+      const firstNavItem = navRef.current.querySelector('.nav-item:first-child');
+      if (firstNavItem) {
+        const firstLink = firstNavItem.querySelector('a');
+        if (firstLink) {
+          const linkRect = firstLink.getBoundingClientRect();
+          const navRect = navRef.current.getBoundingClientRect();
+          
+          indicatorRef.current.style.width = `${linkRect.width}px`;
+          indicatorRef.current.style.transform = `translateX(${linkRect.left - navRect.left}px)`;
+        }
+      }
+    };
+
+    // First position immediately
+    positionToFirstItem();
+    
+    // Use multiple delayed attempts with increasing timeouts
+    const timeouts = [10, 50, 100, 300, 500, 1000].map(delay => 
+      setTimeout(() => {
+        positionToFirstItem();
+        
+        // Enable transitions and show indicator on the second attempt
+        if (delay === 50 && indicatorRef.current) {
+          // Force reflow before enabling transitions
+          void indicatorRef.current.offsetWidth;
+          indicatorRef.current.style.transition = 'transform 0.3s ease, width 0.3s ease, opacity 0.3s ease';
+          indicatorRef.current.style.opacity = '1';
+        }
+        
+        // Mark as positioned after all attempts
+        if (delay === 1000) {
+          isPositionedRef.current = true;
+        }
+      }, delay)
+    );
+    
+    return () => {
+      timeouts.forEach(clearTimeout);
+    };
   }, []);
 
+  // Position indicator whenever active section changes
   useEffect(() => {
-    if (!navRef.current || !indicatorRef.current || !document.body.contains(navRef.current)) return;
+    if (!isPositionedRef.current) return;
+    
+    const positionIndicator = () => {
+      if (!navRef.current || !indicatorRef.current) return;
 
-    const activeIndex = navItems.findIndex(item => (item.sectionId || '') === activeSection);
-    if (activeIndex === -1) return;
+      const activeIndex = navItems.findIndex(item => (item.sectionId || '') === activeSection);
+      if (activeIndex === -1) return;
 
-    const activeItem = navRef.current.querySelector(`.nav-item:nth-child(${activeIndex + 1})`);
-
-    if (activeItem) {
-      const activeLink = activeItem.querySelector('a');
-      if (activeLink) {
-        requestAnimationFrame(() => {
-          if (!navRef.current || !indicatorRef.current) return;
-
-          const { left, width } = activeLink.getBoundingClientRect();
-          const navLeft = navRef.current.getBoundingClientRect().left;
-
-          indicatorRef.current.style.width = `${width}px`;
-          indicatorRef.current.style.transform = `translateX(${left - navLeft}px)`;
-        });
+      const activeItem = navRef.current.querySelector(`.nav-item:nth-child(${activeIndex + 1})`);
+      
+      if (activeItem) {
+        const activeLink = activeItem.querySelector('a');
+        if (activeLink) {
+          const linkRect = activeLink.getBoundingClientRect();
+          const navRect = navRef.current.getBoundingClientRect();
+          
+          indicatorRef.current.style.width = `${linkRect.width}px`;
+          indicatorRef.current.style.transform = `translateX(${linkRect.left - navRect.left}px)`;
+        }
       }
-    }
-  }, [activeSection, navItems]);
+    };
+
+    positionIndicator();
+    
+    // Additional positioning after a delay
+    const timer = setTimeout(positionIndicator, 100);
+    
+    return () => clearTimeout(timer);
+  }, [activeSection, isHeaderScrolled, navItems]);
+
+  // Add event listeners for layout changes
+  useEffect(() => {
+    const handleResize = () => {
+      // Always position relative to first menu item when at the top
+      if (window.scrollY < 100) {
+        setActiveSection('intro');
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleNavClick = (e: React.MouseEvent, item: NavItem) => {
     e.preventDefault();
     closeMobileMenu();
+    
     if (location.pathname === '/') {
-      scrollToSection(item.sectionId);
+      // For "Prezentare", always scroll to very top (0,0)
+      if (item.sectionId === 'intro') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setActiveSection('intro');
+      } else {
+        scrollToSection(item.sectionId);
+      }
     } else {
       navigate('/', { replace: true });
       setTimeout(() => {
-        scrollToSection(item.sectionId);
+        if (item.sectionId === 'intro') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setActiveSection('intro');
+        } else {
+          scrollToSection(item.sectionId);
+        }
       }, 100);
     }
   };
@@ -132,11 +232,13 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
 
     if (sectionId === 'intro') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      setActiveSection('intro');
       return;
     }
 
     const element = document.getElementById(sectionId);
     if (element) {
+      setActiveSection(sectionId);
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -165,7 +267,7 @@ const Navigation: React.FC<NavigationProps> = ({ mobileMenuOpen, closeMobileMenu
               </a>
             </li>
           ))}
-          {/* Animated underline indicator */}
+          {/* Animated underline indicator - z-index adjusted to ensure it's visible */}
           <div className="nav-indicator" ref={indicatorRef}></div>
         </ul>
       </nav>
