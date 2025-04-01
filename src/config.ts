@@ -3,6 +3,7 @@ import { timeService } from "./services/TimeService";
 
 export interface Config {
   registrationFormLink: string;
+  email: string;
   registrationPeriod: {
     startDate: Date;
     endDate: Date;
@@ -19,9 +20,11 @@ const configData: Config = {
   // Link catre google form pentru inscriere, editati cu link-ul corect pentru a schimba peste tot in site
   registrationFormLink: "https://forms.gle/5GPEu4GWnpxjbghd9",
 
+  email: "lrdv@liis.ro",
+
   registrationPeriod: {
-    startDate: new Date("2025-03-27T17:29:00"), // Data când se deschide înscrierea
-    endDate: new Date("2025-03-27T17:31:00"), // Data când se închide înscrierea
+    startDate: new Date("2025-04-28T09:00:00"), // Data când se deschide înscrierea
+    endDate: new Date("2025-04-29T23:59:00"), // Data când se închide înscrierea
   },
 
   // Link catre google drive pentru rezultate, lasati null daca nu exista inca. Se poate utiliza si orice alt service de stocare a fisierelor.

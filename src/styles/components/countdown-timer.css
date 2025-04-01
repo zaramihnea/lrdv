@@ -144,7 +144,12 @@
     font-size: 1.5rem;
   }
   
-  /* Asigură-te că mesajele arată bine și pe mobil */
+  .countdown-timer .countdown-unit:last-child,
+  .countdown-timer .countdown-separator:last-child,
+  .countdown-timer .countdown-separator:nth-last-child(2) {
+    display: none;
+  }
+  
   .registration-message {
     max-width: 95%;
     padding: 8px 10px;

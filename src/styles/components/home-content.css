@@ -4,6 +4,7 @@
   --section-color: var(--color-primary); /* Default section color */
 }
 
+/* ===== Intro Section ===== */
 .intro-section {
   padding: var(--spacing-xxl) 0;
   background-color: var(--color-white);
@@ -22,9 +23,73 @@
   z-index: 1;
 }
 
+/* Collapsible intro text styles */
+.collapsible-content {
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.collapsible-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.collapsible-content.expanded {
+  max-height: 1000px; /* Adjust based on content length */
+  opacity: 1;
+  margin-top: var(--spacing-md);
+}
+
+.read-more-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-weight: 600;
+  cursor: pointer;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  margin: var(--spacing-md) auto 0;
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+  border-bottom: 1px solid transparent;
+  width: fit-content;
+}
+
+.read-more-button:hover {
+  color: var(--color-secondary);
+  border-bottom-color: var(--color-secondary);
+}
+
+.read-more-button i {
+  margin-left: var(--spacing-xs);
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.read-more-button:hover i.fa-chevron-down {
+  transform: translateY(3px);
+}
+
+.read-more-button:hover i.fa-chevron-up {
+  transform: translateY(-3px);
+}
+
+.read-more-container {
+  text-align: center;
+  width: 100%;
+  margin-top: var(--spacing-sm);
+}
+
+/* ===== Updated blockquote styles ===== */
 .intro-quote {
   max-width: 800px;
-  margin: 0 auto var(--spacing-xl);
+  margin: 0 auto var(--spacing-md); /* Reduced bottom margin */
   text-align: center;
   position: relative;
   z-index: 2;
@@ -34,29 +99,20 @@
   position: relative;
   font-family: var(--font-secondary);
   font-style: italic;
-  font-size: 1.5rem;
-  color: var(--color-primary);
-  line-height: 1.6;
-  padding: 0 var(--spacing-xl);
+  font-size: 1.2rem; /* Slightly smaller */
+  color: var(--color-black); /* Changed to black */
+  line-height: 1.5;
+  padding: var(--spacing-sm) var(--spacing-md); /* Reduced padding */
+  margin: 0; /* Remove margins */
+  background-color: transparent;
+  border-left: none;
+  border-radius: 0;
 }
 
+/* Remove the large quote marks */
 .intro-quote blockquote::before,
 .intro-quote blockquote::after {
-  content: '"';
-  position: absolute;
-  font-size: 4rem;
-  color: var(--color-accent);
-  line-height: 1;
-}
-
-.intro-quote blockquote::before {
-  top: -20px;
-  left: 0;
-}
-
-.intro-quote blockquote::after {
-  bottom: -50px;
-  right: 0;
+  display: none;
 }
 
 .intro-text {
@@ -83,6 +139,7 @@
   line-height: 1;
 }
 
+/* ===== Content Sections ===== */
 .content-section {
   padding: var(--content-section-spacing) 0;
   border-bottom: 1px solid var(--color-border);
@@ -101,6 +158,7 @@
   border-bottom: none;
 }
 
+/* ===== Section Headers ===== */
 .section-header {
   text-align: center;
   margin-bottom: var(--spacing-xl);
@@ -144,17 +202,18 @@
 
 .section-decoration .decoration-icon {
   margin: 0 var(--spacing-sm);
-  color: var(--section-color, var(--color-secondary));
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--section-color, var(--color-secondary));
+  font-size: 1.5rem;
 }
 
-.section-decoration .decoration-icon svg {
-  width: 24px;
-  height: 24px;
+.section-decoration .decoration-icon i {
+  font-size: 1.2rem;
 }
 
+/* ===== Content Cards ===== */
 .section-content {
   max-width: 800px;
   margin: 0 auto;
@@ -168,11 +227,6 @@
   position: relative;
   overflow: hidden;
   border: 1px solid var(--color-border);
-}
-
-.content-card:hover {
-  transform: none;
-  box-shadow: var(--shadow-md);
 }
 
 .content-card::before {
@@ -196,6 +250,7 @@
   color: var(--section-color, var(--color-primary));
 }
 
+/* ===== Organization List ===== */
 .organization-list {
   list-style-type: none;
   margin: var(--spacing-lg) 0;
@@ -217,6 +272,7 @@
   color: var(--color-primary);
 }
 
+/* ===== CTA Buttons ===== */
 .cta-container {
   margin-top: var(--spacing-xl);
   text-align: center;
@@ -261,6 +317,10 @@
   width: 100%;
 }
 
+.cta-button i {
+  margin-left: var(--spacing-sm);
+}
+
 .cta-button svg {
   width: 20px;
   height: 20px;
@@ -272,7 +332,7 @@
   transform: translateX(4px);
 }
 
-/* Section-specific styles */
+/* ===== Section-specific styles ===== */
 .inscriere-button {
   background-color: var(--color-inscriere);
   border-color: var(--color-inscriere);
@@ -282,6 +342,7 @@
   color: var(--color-inscriere);
 }
 
+/* ===== Teams Info ===== */
 .teams-info {
   display: flex;
   flex-wrap: wrap;
@@ -311,16 +372,14 @@
   justify-content: center;
   color: var(--color-echipaje, var(--color-secondary));
   flex-shrink: 0;
-  transition: transform 0.3s ease;
+}
+
+.category-icon i {
+  font-size: 1.2rem;
 }
 
 .team-category:hover .category-icon {
   transform: scale(1.1);
-}
-
-.category-icon svg {
-  width: 24px;
-  height: 24px;
 }
 
 .category-content h4 {
@@ -334,6 +393,7 @@
   margin: 0;
 }
 
+/* ===== Evaluation Points ===== */
 .evaluation-points {
   margin-bottom: var(--spacing-xl);
 }
@@ -393,6 +453,7 @@
   font-size: 0.9rem;
 }
 
+/* ===== Evaluation Rules ===== */
 .evaluation-rules {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: var(--radius-md);
@@ -446,97 +507,11 @@
   color: var(--color-evaluare, var(--color-primary));
 }
 
+/* ===== Results Section ===== */
 .results-card {
   text-align: center;
 }
 
-.results-placeholder {
-  margin-top: var(--spacing-xl);
-  padding: var(--spacing-xl);
-  background-color: rgba(var(--color-rezultate-rgb, 242, 204, 143), 0.1);
-  border-radius: var(--radius-md);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.placeholder-icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto var(--spacing-md);
-  color: var(--color-rezultate, var(--color-secondary));
-}
-
-.placeholder-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Animation classes */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.animate-on-scroll.animated {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Add these CSS updates to your home-content.css file */
-
-/* Icon styling for decoration icons */
-.decoration-icon {
-  margin: 0 var(--spacing-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--section-color, var(--color-secondary));
-  font-size: 1.5rem;
-}
-
-.decoration-icon i {
-  font-size: 1.2rem;
-}
-
-/* Category icons */
-.category-icon {
-  width: 48px;
-  height: 48px;
-  background-color: rgba(var(--color-echipaje-rgb, 167, 201, 87), 0.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-echipaje, var(--color-secondary));
-  flex-shrink: 0;
-}
-
-.category-icon i {
-  font-size: 1.2rem;
-}
-
-/* Update content cards for better contrast */
-.content-card {
-  background-color: var(--color-white);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-xl);
-  box-shadow: var(--shadow-md);
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-}
-
-.content-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background-color: var(--section-color, var(--color-primary));
-}
-
-/* Update results placeholder */
 .results-placeholder {
   margin-top: var(--spacing-xl);
   padding: var(--spacing-xl);
@@ -552,48 +527,19 @@
   font-size: 2.5rem;
 }
 
-/* Update the CTA button */
-.cta-button {
-  display: inline-flex;
-  align-items: center;
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  padding: var(--spacing-md) var(--spacing-xl);
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  text-decoration: none;
-  border: 2px solid var(--color-primary);
-  box-shadow: var(--shadow-md);
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.cta-button i {
-  margin-left: var(--spacing-sm);
-}
-
-.inscriere-button {
-  background-color: var(--color-inscriere);
-  border-color: var(--color-inscriere);
-}
-
-/* Section specific backgrounds for better contrast */
-.content-section:nth-child(odd) {
-  background-color: var(--color-background);
-}
-
-.content-section:nth-child(even) {
-  background-color: #f0f0f0; /* Slightly darker than white */
-}
-
-/* Remove animation classes since you don't want hover effects */
+/* ===== Animation Classes ===== */
 .animate-on-scroll {
-  opacity: 1;
-  transform: none;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Animations */
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Animations ===== */
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.1); }
@@ -615,15 +561,15 @@
   to { opacity: 1; transform: translateX(0); }
 }
 
-/* Responsive styles */
+/* ===== Responsive styles ===== */
 @media (max-width: 768px) {
   .intro-section {
     padding: var(--spacing-xl) 0;
   }
   
   .intro-quote blockquote {
-    font-size: 1.25rem;
-    padding: 0 var(--spacing-lg);
+    font-size: 1.1rem;
+    padding: 0 var(--spacing-sm);
   }
   
   .intro-paragraph {

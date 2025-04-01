@@ -27,9 +27,8 @@ const HomePage: React.FC = () => {
         <meta property="og:title" content="Literatura Română în Dimensiune Virtuală" />
         <meta property="og:description" content="Concurs național interdisciplinar care valorifică performanțele elevilor de gimnaziu și liceu în utilizarea computerului și a potențialului creativ într-un demers personalizat de abordare a specificului cultural și literar național." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://literatura-romana-dimensiune-virtuala.vercel.app/" />
+        <meta property="og:url" content="https://lrdv.netlify.app" />
         <meta property="og:image" content="/images/banner_test.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <div className="home-page">
         <Banner />

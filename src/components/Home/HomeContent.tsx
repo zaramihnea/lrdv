@@ -1,13 +1,17 @@
 // src/components/Home/HomeContent.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CountdownTimer from '../UI/CountdownTimer';
 import ContestSections from './ContestSections';
-import RegistrationButton from '../UI/RegistrationButton';
 import config, { getRegistrationStatus } from '../../config';
 import '../../styles/components/home-content.css';
 
 const HomeContent: React.FC = () => {
   const registrationStatus = getRegistrationStatus();
+  const [isIntroExpanded, setIsIntroExpanded] = useState(false);
+
+  const toggleIntro = () => {
+    setIsIntroExpanded(!isIntroExpanded);
+  };
 
   // Function to add scroll reveal animations
   useEffect(() => {
@@ -38,7 +42,7 @@ const HomeContent: React.FC = () => {
   return (
     <div className="home-content">
 
-      <section className="intro-section">
+<section className="intro-section">
         <div className="container">
         <CountdownTimer 
             targetDate={registrationStatus.targetDate} 
@@ -55,14 +59,27 @@ const HomeContent: React.FC = () => {
             <p className="intro-paragraph animate-on-scroll">
               <span className="paragraph-initial">L</span>iceul Teoretic de Informatică "Grigore Moisil" din Iași a inițiat în anul 2007 un concurs județean interdisciplinar, denumit "Literatura ieșeană în dimensiune virtuală". Timp de doi ani, această competiție, organizată în parteneriat cu instituții redutabile din plan local (Inspectoratul Școlar Județean Iași, Muzeul Literaturii Române, Primăria Municipiului Iași), a devenit un punct de maxim interes în peisajul competițional al învățământului ieșean.
             </p>
+            
+            <div className={`collapsible-content ${isIntroExpanded ? 'expanded' : 'collapsed'}`}>
+              <p className="intro-paragraph animate-on-scroll">
+                Prestigiul său s-a datorat modalității de lucru propuse, total inovatoare, evaluării conform unor standarde de performanță clare și pertinente și, nu în ultimul rând, calității deosebite a produselor finale prezentate de către elevii participanți. Devenit din 2010 concurs national, "Literatura română în dimensiune virtuală" își propune să valorifice performanțele elevilor de gimnaziu și liceu (clasele V-XII), din școala românească și, de anul acesta și din Republica Moldova, în utilizarea computerului și a potențialului creativ și imaginativ, într-un demers personalizat de abordare a specificului cultural și literar național.
+              </p>
 
-            <p className="intro-paragraph animate-on-scroll">
-              Prestigiul său s-a datorat modalității de lucru propuse, total inovatoare, evaluării conform unor standarde de performanță clare și pertinente și, nu în ultimul rând, calității deosebite a produselor finale prezentate de către elevii participanți. Devenit din 2010 concurs national, "Literatura română în dimensiune virtuală" își propune să valorifice performanțele elevilor de gimnaziu și liceu (clasele V-XII), din școala românească și, de anul acesta și din Republica Moldova, în utilizarea computerului și a potențialului creativ și imaginativ, într-un demers personalizat de abordare a specificului cultural și literar național.
-            </p>
-
-            <p className="intro-paragraph animate-on-scroll">
-              Concursul deține etapă națională, intervalul organizării și derulării acesteia fiind comunicate prin intermediul Inspectoratului Școlar Județean Iași. Perioada desfășurării etapei naționale este precizată, anual, în calendarele concursurilor naționale, aprobate de Ministerul Educației.
-            </p>
+              <p className="intro-paragraph animate-on-scroll">
+                Concursul deține etapă națională, intervalul organizării și derulării acesteia fiind comunicate prin intermediul Inspectoratului Școlar Județean Iași. Perioada desfășurării etapei naționale este precizată, anual, în calendarele concursurilor naționale, aprobate de Ministerul Educației.
+              </p>
+            </div>
+            
+            <div className="read-more-container">
+              <button 
+                className="read-more-button" 
+                onClick={toggleIntro}
+                aria-expanded={isIntroExpanded}
+              >
+                {isIntroExpanded ? 'Citește mai puțin' : 'Citește mai mult'}
+                <i className={`fas fa-chevron-${isIntroExpanded ? 'up' : 'down'}`}></i>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -87,18 +104,14 @@ const HomeContent: React.FC = () => {
           <div className="section-content">
             <div className="content-card animate-on-scroll">
               <p className="content-paragraph">
-                Etapa de înscriere are loc în intervalul <strong>28‒29.05.2024</strong>.
+                Etapa de înscriere are loc în intervalul <strong>28‒29.04.2025</strong>.
               </p>
               <p className="content-paragraph">
-                Se completează <strong>obligatoriu</strong> formularul de înscriere.
+                Se completează <strong>obligatoriu</strong> formularul de înscriere din colțul din dreapta sus al paginii.
               </p>
-
-              <div className="cta-container">
-                <RegistrationButton className="cta-button inscriere-button">
-                  Formular de înscriere
-                  <i className="fas fa-arrow-right"></i>
-                </RegistrationButton>
-              </div>
+              <p className="content-paragraph">
+                Proiectul va fi trimis pe adresa de email <strong><a href={`mailto:${config.email}`}>{config.email}</a></strong>.
+              </p>
             </div>
           </div>
         </div>
@@ -168,15 +181,15 @@ const HomeContent: React.FC = () => {
               <ul className="organization-list">
                 <li>
                   <span className="list-title">Președinte:</span>
-                  <span className="list-content">directorul instituției organizatoare</span>
+                  <span className="list-content">Directorul instituției organizatoare</span>
                 </li>
                 <li>
                   <span className="list-title">Președinte executiv:</span>
-                  <span className="list-content">directorul adjunct al instituției organizatoare</span>
+                  <span className="list-content">Directorul adjunct al instituției organizatoare</span>
                 </li>
                 <li>
                   <span className="list-title">Membri:</span>
-                  <span className="list-content">profesori de limba română și de informatică, inginer de sistem din instituția organizatoare</span>
+                  <span className="list-content">Profesori de limba română și de informatică, inginer de sistem din instituția organizatoare</span>
                 </li>
               </ul>
             </div>
@@ -208,7 +221,7 @@ const HomeContent: React.FC = () => {
 
                 <div className="evaluation-item">
                   <p className="content-paragraph">
-                    Etapa de evaluare are loc în intervalul <strong>30-31.05.2024</strong>.
+                    Etapa de evaluare are loc în intervalul <strong>7-8.05.2024</strong>.
                   </p>
                 </div>
 
