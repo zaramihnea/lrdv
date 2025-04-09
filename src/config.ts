@@ -24,7 +24,7 @@ const configData: Config = {
 
   registrationPeriod: {
     startDate: new Date("2025-04-28T09:00:00"), // Data când se deschide înscrierea
-    endDate: new Date("2025-04-29T23:59:00"), // Data când se închide înscrierea
+    endDate: new Date("2025-04-30T23:59:00"), // Data când se închide înscrierea
   },
 
   // Link catre google drive pentru rezultate, lasati null daca nu exista inca. Se poate utiliza si orice alt service de stocare a fisierelor.
