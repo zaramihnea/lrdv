@@ -104,7 +104,7 @@ const HomeContent: React.FC = () => {
           <div className="section-content">
             <div className="content-card animate-on-scroll">
               <p className="content-paragraph">
-                Etapa de înscriere are loc în intervalul <strong>28‒29.04.2025</strong>.
+                Etapa de înscriere are loc în intervalul <strong>28‒30.05.2025</strong>.
               </p>
               <p className="content-paragraph">
                 Se completează <strong>obligatoriu</strong> formularul de înscriere din colțul din dreapta sus al paginii.
