@@ -221,7 +221,7 @@ const HomeContent: React.FC = () => {
 
                 <div className="evaluation-item">
                   <p className="content-paragraph">
-                    Etapa de evaluare are loc în intervalul <strong>7-8.05.2024</strong>.
+                    Etapa de evaluare are loc în intervalul <strong>3-4.06.2025</strong>.
                   </p>
                 </div>
 
