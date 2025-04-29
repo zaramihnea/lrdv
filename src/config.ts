@@ -28,7 +28,7 @@ const configData: Config = {
   },
 
   // Link catre google drive pentru rezultate, lasati null daca nu exista inca. Se poate utiliza si orice alt service de stocare a fisierelor.
-  resultsLink: null, // Example: "https://drive.google.com/file/d/..." / null
+  resultsLink: "https://drive.google.com/drive/folders/14Qx-d1ZhakKJCqVyb-wOHIvd5t0xBL5A?usp=sharing", // Example: "https://drive.google.com/file/d/..." / null
 
   // Array cu id-urile sectiunilor care trebuie ascunse. Acestea vor fi ascunse din meniu si din pagina principala.
   // Exemplu: ['rezultate', 'inscriere', etc.]
