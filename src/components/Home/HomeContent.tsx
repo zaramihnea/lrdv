@@ -295,7 +295,7 @@ const HomeContent: React.FC = () => {
               {config.resultsLink ? (
                 <div className="cta-container">
                   <a href={config.resultsLink} className="cta-button" target="_blank" rel="noopener noreferrer" style={{ backgroundColor: 'var(--color-rezultate)', borderColor: 'var(--color-rezultate)' }}>
-                    Descarcă rezultatele
+                    Vizualizare rezultate
                     <i className="fas fa-download"></i>
                   </a>
                 </div>
