@@ -39,12 +39,21 @@ const HomeContent: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Conținutul programei
+  const programaContent = `Programa concursului respectă curriculum extins pentru clasele V - XII la limba și literatura română, iar la informatică implică abilitățile de operare în diverse programe specifice. Lucrările pot fi realizate în următoarele formate:
+
+• Prezentări realizate în PowerPoint (exclusiv pentru gimnaziu)
+
+• Film documentar, cu o durată de maximum 15 minute, realizat în: FLASH, Ulead Video Studio, Windows Movie Maker sau alte programe la alegerea participanților
+
+• Website realizat cu: Macromedia Dreamweaver, PHP și MySQL, Flash sau alte tehnologii web`;
+
   return (
     <div className="home-content">
 
-<section className="intro-section">
+      <section className="intro-section">
         <div className="container">
-        <CountdownTimer 
+          <CountdownTimer 
             targetDate={registrationStatus.targetDate} 
             eventLabel={registrationStatus.message} 
           />
@@ -85,7 +94,7 @@ const HomeContent: React.FC = () => {
       </section>
 
       <section id="sectiuni">
-        <ContestSections />
+        <ContestSections programContent={programaContent} />
       </section>
 
       <section id="inscriere" className={`content-section ${config.hiddenSections.includes('inscriere') ? 'hidden' : ''}`}>

@@ -262,6 +262,153 @@
   font-style: italic;
 }
 
+/* Adăugați aceste stiluri la sfârșitul fișierului contest-sections.css */
+
+/* Stiluri pentru cardul Programa */
+.program-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid #3c2a21;
+  margin-top: 3rem;
+  position: relative;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s;
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+}
+
+.program-title {
+  color: #3c2a21;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  font-family: serif;
+  display: flex;
+  align-items: center;
+}
+
+.program-icon {
+  background-color: rgba(60, 42, 33, 0.1);
+  color: #3c2a21;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  padding: 0.5rem;
+}
+
+.program-content {
+  color: #4b5563;
+  line-height: 1.75;
+}
+
+.program-content p {
+  margin-bottom: 0;
+}
+
+/* Adăugați aceste stiluri la sfârșitul fișierului contest-sections.css */
+
+/* Stiluri pentru cardul Programa */
+.program-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid #3c2a21;
+  margin-top: 3rem;
+  position: relative;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s;
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+}
+
+.program-title {
+  color: #3c2a21;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  font-family: serif;
+  display: flex;
+  align-items: center;
+}
+
+.program-icon {
+  background-color: rgba(60, 42, 33, 0.1);
+  color: #3c2a21;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  padding: 0.5rem;
+}
+
+.program-content {
+  color: #4b5563;
+  line-height: 1.75;
+}
+
+.program-content p {
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+/* Stilizare listă cu bullet points */
+.program-list {
+  margin: 0.5rem 0 1rem 1.5rem;
+  padding-left: 1rem;
+  list-style-position: outside;
+  text-align: left;
+}
+
+.program-list li {
+  margin-bottom: 1.25rem;
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+.program-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Stiluri responsive */
+@media (max-width: 768px) {
+  .program-card {
+    padding: 1.25rem;
+    margin-top: 2rem;
+  }
+  
+  .program-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  
+  .program-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.75rem;
+  }
+  
+  .program-list {
+    margin-left: 0.75rem;
+    padding-left: 0.75rem;
+  }
+}
+
 /* Media queries for responsive design */
 @media (min-width: 768px) {
   .contest-sections .section-title {

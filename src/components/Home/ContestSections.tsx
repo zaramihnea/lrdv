@@ -2,7 +2,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../../styles/components/contest-sections.css';
 
-const ContestSections: React.FC = () => {
+interface ContestSectionsProps {
+  programContent?: string;
+}
+
+const ContestSections: React.FC<ContestSectionsProps> = ({ programContent }) => {
   const [activeTab, setActiveTab] = useState(0);
   const tabsRef = useRef<HTMLDivElement | null>(null);
   const [showScrollHint, setShowScrollHint] = useState(true);
@@ -88,6 +92,51 @@ const ContestSections: React.FC = () => {
 
   const handleTabsScroll = () => {
     setShowScrollHint(false);
+  };
+
+  // Function to process program content and render it correctly
+  const renderProgramContent = () => {
+    if (!programContent) return null;
+
+    // Split the content by lines
+    const lines = programContent.split('\n');
+    
+    // Find the introduction text (everything before the first bullet point)
+    const introText = [];
+    let i = 0;
+    
+    while (i < lines.length && !lines[i].includes('•')) {
+      if (lines[i].trim() !== '') {
+        introText.push(lines[i]);
+      }
+      i++;
+    }
+    
+    // Collect bullet points
+    const bulletPoints = [];
+    while (i < lines.length) {
+      if (lines[i].includes('•')) {
+        // Remove the bullet character and trim
+        const bulletText = lines[i].replace('•', '').trim();
+        bulletPoints.push(bulletText);
+      }
+      i++;
+    }
+
+    return (
+      <>
+        {introText.map((text, index) => (
+          <p key={`intro-${index}`}>{text}</p>
+        ))}
+        {bulletPoints.length > 0 && (
+          <ul className="program-list">
+            {bulletPoints.map((point, index) => (
+              <li key={`point-${index}`}>{point}</li>
+            ))}
+          </ul>
+        )}
+      </>
+    );
   };
 
   return (
@@ -203,6 +252,19 @@ const ContestSections: React.FC = () => {
             </button>
           </div>
         </div>
+
+        {/* Programa Card - Added after all sections and carousel */}
+        {programContent && (
+          <div className="program-card animate-on-scroll">
+            <h3 className="program-title">
+              <i className="fas fa-book-open program-icon"></i>
+              Programa concursului
+            </h3>
+            <div className="program-content">
+              {renderProgramContent()}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
