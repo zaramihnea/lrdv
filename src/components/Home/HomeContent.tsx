@@ -40,13 +40,7 @@ const HomeContent: React.FC = () => {
   }, []);
 
   // Conținutul programei
-  const programaContent = `Programa concursului respectă curriculum extins pentru clasele V - XII la limba și literatura română, iar la informatică implică abilitățile de operare în diverse programe specifice. Lucrările pot fi realizate în următoarele formate:
-
-• Prezentări realizate în PowerPoint (exclusiv pentru gimnaziu)
-
-• Film documentar, cu o durată de maximum 15 minute, realizat în: FLASH, Ulead Video Studio, Windows Movie Maker sau alte programe la alegerea participanților
-
-• Website realizat cu: Macromedia Dreamweaver, PHP și MySQL, Flash sau alte tehnologii web`;
+  const programaContent = `Programa concursului respectă curriculum extins pentru clasele V - XII la limba şi literatura română, iar la informatică implică abilităţile de operare în programele Power Point (exclusiv gimnaziu), Website (Dreamweaver, PHP, MySQL, Flash etc.), Film (Ulead Video Studio, Windows Movie Maker, FLASH sau altele, la alegerea participanţilor). Proba constă într-o prezentare POWER POINT (doar pentru gimnaziu), film documentar, cu o durată de maximum 15 minute, realizat în: FLASH, Ulead Video Studio, Windows Movie Maker etc., sau Website realizat cu: Macromedia Dreamweaver, PHP şi MySQL, Flash etc.b`;
 
   return (
     <div className="home-content">
