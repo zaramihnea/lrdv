@@ -23,7 +23,7 @@ const configData: Config = {
   email: "lrdv@liis.ro",
 
   registrationPeriod: {
-    startDate: new Date("2025-05-28T09:00:00"), // Data când se deschide înscrierea
+    startDate: new Date("2025-05-27T19:00:00"), // Data când se deschide înscrierea
     endDate: new Date("2025-05-30T23:59:00"), // Data când se închide înscrierea
   },
 
