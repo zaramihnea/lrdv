@@ -18,12 +18,12 @@ export interface Config {
 //=========================================================
 const configData: Config = {
   // Link catre google form pentru inscriere, editati cu link-ul corect pentru a schimba peste tot in site
-  registrationFormLink: "https://forms.gle/5GPEu4GWnpxjbghd9",
+  registrationFormLink: "https://forms.gle/oKjrwTtYSyZ2mjpW8",
 
   email: "lrdv@liis.ro",
 
   registrationPeriod: {
-    startDate: new Date("2025-05-28T00:00:00"), // Data când se deschide înscrierea
+    startDate: new Date("2025-05-27T19:07:00"), // Data când se deschide înscrierea
     endDate: new Date("2025-05-30T23:59:00"), // Data când se închide înscrierea
   },
 
